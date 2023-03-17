@@ -1,0 +1,233 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Towers Of Agony", HidePremium = true, IntroText = "Towers Suck", SaveConfig = false, ConfigFolder = "Cool"})
+local Home = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local HomeSection = Home:AddSection({
+	Name = "Main"
+})
+wait()
+local cmdp = game:GetService("Players")
+local cmdlp = cmdp.LocalPlayer
+local player = cmdlp
+
+function findplr(args, tbl)
+	if tbl == nil then
+		local tbl = cmdp:GetPlayers()
+		if args == "me" then
+			return cmdlp
+		elseif args == "random" then 
+			return tbl[math.random(1,#tbl)]
+		elseif args == "new" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if v.AccountAge < 30 and v ~= cmdlp then
+					vAges[#vAges+1] = v
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		elseif args == "old" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if v.AccountAge > 30 and v ~= cmdlp then
+					vAges[#vAges+1] = v
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		elseif args == "bacon" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if v.Character:FindFirstChild("Pal Hair") or v.Character:FindFirstChild("Kate Hair") and v ~= cmdlp then
+					vAges[#vAges+1] = v
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		elseif args == "friend" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if v:IsFriendsWith(cmdlp.UserId) and v ~= cmdlp then
+					vAges[#vAges+1] = v
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		elseif args == "notfriend" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if not v:IsFriendsWith(cmdlp.UserId) and v ~= cmdlp then
+					vAges[#vAges+1] = v
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		elseif args == "ally" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if v.Team == cmdlp.Team and v ~= cmdlp then
+					vAges[#vAges+1] = v
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		elseif args == "enemy" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if v.Team ~= cmdlp.Team then
+					vAges[#vAges+1] = v
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		elseif args == "near" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if v ~= cmdlp then
+					local math = (v.Character:FindFirstChild("HumanoidRootPart").Position - cmdlp.Character.HumanoidRootPart.Position).magnitude
+					if math < 30 then
+						vAges[#vAges+1] = v
+					end
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		elseif args == "far" then
+			local vAges = {} 
+			for _,v in pairs(tbl) do
+				if v ~= cmdlp then
+					local math = (v.Character:FindFirstChild("HumanoidRootPart").Position - cmdlp.Character.HumanoidRootPart.Position).magnitude
+					if math > 30 then
+						vAges[#vAges+1] = v
+					end
+				end
+			end
+			return vAges[math.random(1,#vAges)]
+		else 
+			for _,v in pairs(tbl) do
+				if v.Name:lower():find(args:lower()) or v.DisplayName:lower():find(args:lower()) then
+					return v
+				end
+			end
+		end
+	else
+		for _, plr in pairs(tbl) do
+			if plr.UserName:lower():find(args:lower()) or plr.DisplayName:lower():find(args:lower()) then
+				return plr
+			end
+		end
+	end
+end
+wait()
+Home:AddButton({
+Name = "Teleport To Top of Space Tower",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(13.8731966, 397.849091, 1333.34351)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of Toxic Tower",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4.54966307, 118.436188, 1112.07422)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of Pro Tower",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(12.9233685, 217.299316, -427.840302)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of PeterDaFox Tower",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(40.0178223, 71.7377777, 987.087524)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of Community Tower",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8.65064144, 284.498993, -137.164963)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of Tower Of Agony",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10.5238342, 675.599243, 0.00266191526)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of Tower Of Yeet",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(45.2750702, 545.700684, 177.584869)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of Warmup Tower",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5.59569597, 72.5005264, 414.113983)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of Math Tower",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-24.6316471, 423.599335, 1540.71204)
+end})
+
+Home:AddButton({
+Name = "Teleport To Top of Tekno Tower",
+Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4.11212826, 135.171829, 625.964783)
+end})
+
+Home:AddTextbox({
+Name = "(TOOL, BUY SPEED COIL) Bring: ",
+Default = "Username or Display-name",
+TextDisappear = true,
+Callback = function(user)
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+wait()
+	local target = findplr(user)
+	cmdlp.Character.Humanoid.Name = 1
+	local l = cmdlp.Character["1"]:Clone()
+	l.Parent = cmdlp.Character
+	l.Name = "Humanoid"
+	wait(.2)
+	cmdlp.Character["1"]:Destroy()
+	workspace.CurrentCamera.CameraSubject = cmdlp.Character
+	cmdlp.Character.Humanoid.DisplayDistanceType = "None"
+	cmdlp.Character.Humanoid:UnequipTools()
+	local v = cmdlp.Backpack:FindFirstChild("SpeedCoil")
+	v.Parent = cmdlp.Character
+	v.Parent = cmdlp.Character.HumanoidRootPart
+	firetouchinterest(target.Character.HumanoidRootPart, v.Handle, 0)
+	firetouchinterest(target.Character.HumanoidRootPart, v.Handle, 1)
+	pcall(function() cmdlp.Character.HumanoidRootPart.CFrame = NormPos end)
+	wait(.3)
+	cmdlp.Character:Remove()
+	cmdlp.CharacterAdded:Wait()
+end})
+
+Home:AddToggle({
+Name = "AFK Farm",
+Default = false,
+Callback = function(farm)
+if farm then
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+_G.tog = true
+while _G.tog == true do
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").Lobby.Winners.Winners.T1.Position)
+end
+else
+_G.tog = false
+end
+end})
+
+Home:AddButton({
+Name = "Remove Anti-Cheat",
+Callback = function()
+if game.Players.LocalPlayer.Character:FindFirstChild("Anti Exploit") then
+    game.Players.LocalPlayer.Character:FindFirstChild("Anti Exploit"):Destroy()
+wait()
+if game:GetService("ReplicatedStorage"):FindFirstChild("Kick") then
+    game:GetService("ReplicatedStorage"):FindFirstChild("Kick"):Destroy()
+else
+    print("Anti-Cheat already destroyed")
+end
+end
+end})

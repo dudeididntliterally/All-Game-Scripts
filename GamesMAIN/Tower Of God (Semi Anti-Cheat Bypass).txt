@@ -1,0 +1,86 @@
+repeat wait() until game:IsLoaded()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Tower Of God", HidePremium = true, IntroText = "Towers Suck", SaveConfig = false, ConfigFolder = "TOG"})
+local Home = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local HomeSection = Home:AddSection({
+	Name = "Main"
+})
+
+Home:AddButton({
+Name = "(USE) Anti-Cheat Remover (shitty game)",
+Callback = function()
+local reg = getreg()
+
+for i, Function in next, reg do
+    if type(Function) == 'function' then
+        local info = getinfo(Function)
+        
+        if info.name == 'kick' then
+            if (hookfunction(info.func, function(...)end)) then
+                print'succesfully hooked kick'
+            else
+                print'failed to hook kick'
+            end
+        end
+    end
+end
+wait(0.5)
+local function DisableSignal(signal, name)
+    local successes = true
+    for i, connection in next, getconnections(signal) do
+        local success, err = pcall(connection.Disable)
+        if success then
+            print('successfully disconnected ' .. name .. '\'s #' .. tostring(i) .. ' connection')
+        else
+            if err then
+                print('failed to disconnect ' .. name .. '\'s # ' .. tostring(i) .. 'connection due to ' .. err)
+            end
+            successes = false
+        end
+    end
+    return successes
+end
+
+local localscript = game:GetService'Players'.LocalPlayer.PlayerScripts.LocalScript
+local localscript2 = game:GetService'Players'.LocalPlayer.PlayerScripts["LocalScript 2"]
+local localscript3 = game:GetService'Players'.LocalPlayer.PlayerScripts["LocalScript 3"]
+
+local localscriptSignal = localscript.Changed
+local localscript2Signal = localscript2.Changed
+local localscript3Signal = localscript3.Changed
+
+if DisableSignal(localscriptSignal, 'localscript') then
+    localscript:Destroy()
+end
+if DisableSignal(localscript2Signal, 'localscript2') then
+    localscript2:Destroy()
+end
+if DisableSignal(localscript3Signal, 'localscript3') then
+    localscript3:Destroy()
+end
+end})
+
+Home:AddButton({
+Name = "Teleport To End",
+Callback = function()
+local CFrameEnd = CFrame.new(game:GetService("Workspace").Storage.End.Walls2.Badge.Position)
+local Time = 0.2
+local tween =  game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Time), {CFrame = CFrameEnd})
+tween:Play()
+tween.Completed:Wait()
+end})
+
+Home:AddToggle({
+Name = "Godmode",
+Default = false,
+Callback = function(god)
+if god then
+game:GetService("ReplicatedStorage").Mutators.Invincibility.Value = true
+else
+game:GetService("ReplicatedStorage").Mutators.Invincibility.Value = false
+end
+end})

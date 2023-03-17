@@ -1,0 +1,26 @@
+repeat wait() until game:IsLoaded()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Public Bathroom Sim", HidePremium = true, IntroText = "...", SaveConfig = false, ConfigFolder = "Bathrooms"})
+local Home = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local HomeSection = Home:AddSection({
+	Name = "Main"
+})
+wait()
+Home:AddToggle({
+Name = "Anti Ragdoll",
+Default = false,
+Callback = function(oo)
+repeat wait() until game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Local Ragdoll")
+if oo then
+_G.rag = true
+if _G.rag == true then
+game.Players.LocalPlayer.Character["Local Ragdoll"].Disabled = true
+end
+else
+game.Players.LocalPlayer.Character["Local Ragdoll"].Disabled = false
+end
+end})

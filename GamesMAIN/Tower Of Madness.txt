@@ -1,0 +1,72 @@
+repeat wait() until game:IsLoaded()
+if game.CoreGui:FindFirstChild("Orion") then
+    game.CoreGui:FindFirstChild("Orion"):Destroy()
+end
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Tower Of Madness", HidePremium = true, IntroText = "Towers Suck Honestly", SaveConfig = false, ConfigFolder = "TOM"})
+local Home = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local HomeSection = Home:AddSection({
+	Name = "Main"
+})
+
+Home:AddButton({
+Name = "Win",
+Callback = function()
+for _,v in pairs(game:GetService("Workspace").Tower.Winners.WinnersCheckpoint:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0)
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1)
+end
+end
+end})
+
+Home:AddToggle({
+Name = "Double Jump",
+Default = false,
+Callback = function(kk)
+if kk then
+_G.jump = true
+if _G.jump == true then
+game:GetService("Workspace").DoubleJumpEnabled.Value = true
+else
+game:GetService("Workspace").DoubleJumpEnabled.Value = false
+end
+end
+end})
+
+Home:AddToggle({
+Name = "Godmode",
+Default = false,
+Callback = function(lll)
+if lll then
+_G.god = true
+if _G.god == true then
+game:GetService("Workspace").ImmunityEnabled.Value = true
+else
+game:GetService("Workspace").ImmunityEnabled.Value = false
+end
+end
+end})
+
+Home:AddButton({
+Name = "Go to winners room",
+Callback = function()
+local thi = game:GetService("Workspace").Tower.Winners.WinnersRoomEntrance
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = thi.CFrame
+wait(0.5)
+fireproximityprompt(game:GetService("Workspace").Tower.Winners.WinnersRoomEntrance.Attachment.ProximityPrompt)
+end})
+
+Home:AddButton({
+Name = "Leave winners room",
+Callback = function()
+local thi = game:GetService("Workspace").WinnersRoom.WinnersRoomExit
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = thi.CFrame
+wait(0.5)
+fireproximityprompt(game:GetService("Workspace").WinnersRoom.WinnersRoomExit.Attachment.ProximityPrompt)
+end})
